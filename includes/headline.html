@@ -5,12 +5,13 @@
 {% endif %}
 
 <div class="gem-ig-headline-container"> 
-    <div id="gem-ig-headline" class="col-lg-10 col-md-12">
+    <div id="gem-ig-headline">
         <div class="gem-ig-headline-title">
             {% include headline-title.html %}
         </div>
         <div id="ig-status" class="gem-ig-headline-subtitle">
-            <span style="display:inline-block;">Version {{site.data.fhir.ig.version}} - {{status}}
+            <span class="ig-version-badge">Version {{site.data.fhir.ig.version | escape_once}}</span>
+            <span class="ig-release-status">{{status | escape_once}}
                 {% assign igId = site.data.fhir.ig.id | prepend: "ImplementationGuide/" %}
                 {% comment %}
                 {% for jurisdiction in site.data.resources[igId].jurisdictions %}
