@@ -32,6 +32,7 @@ body.ig-template-modern {
 }
 
 .ig-template-modern .segment > .container {
+  background: transparent;
   width: 100%;
   max-width: 1200px;
   padding-inline: 24px;
@@ -166,6 +167,13 @@ body.ig-template-modern {
 .ig-template-modern #segment-footer { background: transparent; color: var(--ig-muted); }
 .ig-template-modern #segment-footer > .container { border-top: 1px solid var(--ig-line); padding-block: 20px 32px; }
 .ig-template-modern #segment-footer .inner-wrapper { background: transparent; padding-top: 16px; }
+.ig-template-modern .ig-footer-navigation,
+.ig-template-modern .ig-footer-navigation table,
+.ig-template-modern .ig-footer-navigation tbody,
+.ig-template-modern .ig-footer-navigation tr,
+.ig-template-modern .ig-footer-navigation td {
+  background: transparent;
+}
 .ig-template-modern #segment-footer p { font-size: 13px; line-height: 1.7; }
 .ig-template-modern .ig-skip-link {
   position: absolute;
