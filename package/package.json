@@ -1,0 +1,12 @@
+{
+    "name" : "onyg.ig.template2",
+    "type" : "fhir.template",
+    "license" : "CC0-1.0",
+    "description" : "onyg FHIR IG Template",
+    "base" : "fhir2.base.template",
+    "canonical": "https://github.com/onyg/new-fhir-template",
+    "dependencies" : {
+      "fhir2.base.template" : "0.1.0"
+    },
+    "version" : "0.0.1"
+  }

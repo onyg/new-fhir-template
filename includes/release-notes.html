@@ -1,0 +1,121 @@
+{% if include.diff_to %}
+
+<script type="text/javascript" src="assets/js/diff2html-ui.min.js"> </script>
+<link href="assets/css/diff2html.min.css" rel="stylesheet" />
+<script type="text/javascript" src="assets/js/ig.releasenotes.gematik.js"> </script>
+
+{% endif %}
+
+{% for release in site.data.release-notes.releases %}
+
+{% if release.version == include.version %}
+
+{% assign release_safe_id = include.version | replace: ".", "-" | replace: " ", "-" %}
+
+
+<table class="no-stripe release-notes" id="release-table-{{ release_safe_id }}">
+    <tr id="row-toggle-all-{{ release_safe_id }}" style="display: none;">
+        <td colspan="99" style="text-align: right; border: none; padding-bottom: 10px;">
+            <button id="btn-toggle-all-{{ release_safe_id }}" class="btn btn-outline-primary btn-sm" style="font-size: 0.75em; padding: 2px 6px; color: black;">
+                &#128269; Alle Details umschalten
+            </button>
+        </td>
+    </tr>
+    {% for requirement in release.requirements %}
+    <tr>
+        <td>
+            <strong>
+            {% case requirement.release_status %}
+            {% when "NEW" %} NEU
+            {% when "MODIFIED" %} ÄND
+            {% when "MOVED" %} VERS
+            {% when "DELETED" %} DEL
+            {% else %} {{ requirement.release_status}}
+            {% endcase %}
+            </strong>
+        </td>
+        <td>
+            {% if include.with_links and requirement.release_status == "NEW" or requirement.release_status == "MODIFIED" or requirement.release_status == "MOVED" %}
+                <a class="requirement-link" href="./{{ requirement.path  | default "#" }}" data-anchor="{{ requirement.key }}{% if requirement.version > 0 %}-{{ requirement.version | prepend: "0" | slice: -2, 2 }}{% endif %}">
+                    {{ requirement.key }}{% if requirement.version > 0 %}-{{ requirement.version | prepend: "0" | slice: -2, 2 }}{% endif %}
+                </a>
+            {% else %}
+                <span>{{ requirement.key }}{% if requirement.version > 0 %}-{{ requirement.version | prepend: "0" | slice: -2, 2 }}{% endif %}</span>
+            {% endif %}
+        </td>
+        <td>
+            {{ requirement.title }}
+
+            {% assign diff = "" %}
+
+            {% if include.diff_to and requirement.release_status == "MODIFIED" %}
+
+                {% assign requirement_safe_key = requirement.key | replace: ".", "-" | replace: " ", "-" %}
+
+                {% assign diff = requirement.diff[include.diff_to] %}
+
+                {% if diff != empty %}
+                    <button class="btn btn-outline-primary btn-sm ms-2" 
+                            style="font-size: 0.75em; padding: 2px 6px; color: black; margin-left: 10px; float: right;" 
+                            type="button" 
+                            data-toggle="collapse" 
+                            data-bs-toggle="collapse" 
+                            data-target="#diff-collapse-{{ requirement_safe_key }}" 
+                            data-bs-target="#diff-collapse-{{ requirement_safe_key }}" 
+                            aria-expanded="false" 
+                            title="Änderungsdetails anzeigen">
+                        &#128269; Details
+                    </button>
+                {% endif %}
+
+            {% endif %}
+        </td>
+    </tr>
+
+    {% if diff != empty %}
+        <!-- This row is invisible when collapsed -->
+        <tr>
+            <td colspan="3" style="padding: 0; border: none;">
+                <!-- collapsible content area -->
+                <div class="collapse diff-collapse-area" id="diff-collapse-{{ requirement_safe_key }}">
+                    <div style="padding: 15px; background-color: #f8f9fa; margin-bottom: 10px;">
+
+                        {% assign ordered_keys = "title,conformance,text" | split: "," %}
+
+                        {% for key in ordered_keys %}
+
+                            {% assign value = diff[key] %}
+
+                            {% if value != "" %}
+
+                                <p style="margin-bottom: 2px;"><strong>{{ key | capitalize }}:</strong></p>
+
+                                {% assign diff_id = requirement_safe_key | append: "-" | append: key %}
+
+                                <!-- Hidden diff data -->
+                                <div id="diff-data-{{ diff_id }}" style="display: none;">{{ value | escape }}</div>
+                                <!-- Target Div -->
+                                <div id="diff-ui-{{ diff_id }}" style="border: 1px solid #ddd; border-radius: 4px; background-color: #ffffff;"></div>
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+
+    {% endfor %}
+</table>
+
+<div class="legend">
+    Legende:
+    <span><strong>NEU</strong> = Hinzugefügt</span> |
+    <span><strong>ÄND</strong> = Geändert</span> |
+    <span><strong>VERS</strong> = Verschoben</span> |
+    <span><strong>DEL</strong> = Entfernt</span>
+</div>
+
+{% endif %}
+
+{% endfor %}

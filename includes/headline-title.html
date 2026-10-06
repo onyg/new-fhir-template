@@ -1,0 +1,2 @@
+{% assign ig_title = site.data.fhir.ig.title | escape_once %}
+{{ ig_title | replace_first: 'Implementation Guide', 'Implementation Guide<br />' }}
