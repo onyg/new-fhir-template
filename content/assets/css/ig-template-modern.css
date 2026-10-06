@@ -33,9 +33,9 @@ body.ig-template-modern {
 
 .ig-template-modern .segment > .container {
   background: transparent;
-  width: 100%;
+  width: calc(100% - 32px);
   max-width: 1200px;
-  padding-inline: 24px;
+  padding-inline: 0;
 }
 .ig-template-modern #segment-header,
 .ig-template-modern #segment-header > .container { background: transparent; }
@@ -187,7 +187,6 @@ body.ig-template-modern {
 }
 .ig-template-modern .ig-skip-link:focus { top: 12px; }
 @media (max-width: 767px) {
-  .ig-template-modern .segment > .container { padding-inline: 16px; }
   .ig-template-modern #gem-ig-logo { padding-block: 20px; }
   .ig-template-modern #gem-ig-headline { padding: 24px 20px; }
   .ig-template-modern #segment-content > .container {
