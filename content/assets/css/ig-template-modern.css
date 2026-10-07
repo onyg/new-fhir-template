@@ -335,3 +335,18 @@ body.ig-template-modern {
     overflow: visible;
   }
 }
+
+
+.bubble-link {
+    display: none;
+    transition: opacity 0.2s;
+}
+
+h1:hover .bubble-link,
+h2:hover .bubble-link,
+h3:hover .bubble-link,
+h4:hover .bubble-link,
+h5:hover .bubble-link,
+h6:hover .bubble-link {
+    display: inline;
+}
