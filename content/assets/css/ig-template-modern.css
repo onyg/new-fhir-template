@@ -165,7 +165,8 @@ body.ig-template-modern {
 .ig-template-modern #publish-box,
 .ig-template-modern #toc { border-radius: 6px; }
 .ig-template-modern #segment-footer { background: transparent; color: var(--ig-muted); }
-.ig-template-modern #segment-footer > .container { border-top: 1px solid var(--ig-line); padding-block: 20px 32px; }
+/* .ig-template-modern #segment-footer > .container { border-top: 1px solid var(--ig-line); padding-block: 20px 32px; } */
+.ig-template-modern #segment-footer > .container { padding-block: 20px 32px; }
 .ig-template-modern #segment-footer .inner-wrapper { background: transparent; padding-top: 16px; }
 .ig-template-modern .ig-footer-navigation,
 .ig-template-modern .ig-footer-navigation table,
