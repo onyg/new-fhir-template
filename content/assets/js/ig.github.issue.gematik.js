@@ -4,8 +4,8 @@
 
 {% if site.data.constants.ballot %}
 
-const newIssueGithubLink = "{{site.data.constants.ballotIssueGithubLink}}";
-const linkParameter = {{site.data.constants.ballotLinkParameter | default: 'page-link' | jsonify}};
+const newIssueGithubLink = {{ site.data.constants.ballotIssueGithubLink }};
+const linkParameter = {{ site.data.constants.ballotLinkParameter | default: 'page-link' | jsonify }};
 
 document.addEventListener("DOMContentLoaded", function() {
   setTimeout(function() {
